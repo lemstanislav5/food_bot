@@ -1,0 +1,32 @@
+{
+  "name": "food_bot",
+  "version": "1.0.0",
+  "description": "food boot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/lemstanislav5/food_bot.git"
+  },
+  "keywords": [
+    "food",
+    "telegram",
+    "bot"
+  ],
+  "author": "My",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lemstanislav5/food_bot/issues"
+  },
+  "homepage": "https://github.com/lemstanislav5/food_bot#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "nedb": "^1.8.0",
+    "nodemon": "^2.0.19",
+    "path": "^0.12.7",
+    "telegraf": "^4.9.0"
+  }
+}
