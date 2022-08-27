@@ -77,6 +77,7 @@ bot.on('text', (ctx) => {
         const createHtml = (table) => `
           <html>
             <head>
+              <meta charset="utf-8">
               <style>
                 table {
                   width: 100%;
