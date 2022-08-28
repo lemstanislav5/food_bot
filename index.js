@@ -59,7 +59,6 @@ bot.on('text', (ctx) => {
     let [start, end] = message.replace('П.', ' ').replace(/ /g,'').split(',')
     start = Date.parse(date.getFullYear() + '-' + start.split('.')[1].replace(/ /g,'') + '-' + start.split('.')[0].replace(/ /g,''));
     end = Date.parse(date.getFullYear() + '-' + end.split('.')[1].replace(/ /g,'') + '-' + end.split('.')[0].replace(/ /g,''));
-    console.log(start, end)
     if(start !== undefined && end !== undefined){
       let res = db.find({ $where: function(){ 
         if(typeof this.date === 'number'){
@@ -85,6 +84,10 @@ bot.on('text', (ctx) => {
             <head>
               <meta charset="utf-8">
               <style>
+                body{
+                  color: #fff;
+                  background: rgb(12, 3, 71)
+                }
                 table {
                   width: 100%;
                 }
@@ -96,13 +99,10 @@ bot.on('text', (ctx) => {
                   padding: 15px;
                 }
                 tr:nth-child(odd) {
-                  background: #CCC
+                  background: rgb(42, 41, 41)
                 }
                 tr:nth-child(even) {
-                  background: #FFF
-                }
-                .no-content {
-                  background-color: red;
+                  background: rgb(7, 4, 28)
                 }
               </style>
             </head>
@@ -122,23 +122,25 @@ bot.on('text', (ctx) => {
         
         try {
           if (doesFileExist(buildPathHtml)) {
-              console.log('Deleting old build file');
+              console.log('Старй файл HTML удален!');
               fs.unlinkSync(buildPathHtml);
           }
 
           const rows = docs.map(item => {
             let date = new Date(item.date)
-            let day = (date.getDate() < 10)? '0' + date.getDate(): date.getDate();
-            let month = (date.getMonth()< 10)? '0' + date.getMonth(): date.getMonth();
+            let day = date.getDate();
+            day = (day < 10)? '0' + day: day;
+            let month = parseInt(date.getMonth()) + 1;
+            month = (month< 10)? '0' + month: month;
             let year = date.getFullYear();
             return '<tr>' + '<td>'+item.id +'</td><td>'+ day + '.' + month + '.' + year +'</td><td>'+item.text+'</td>' + '</tr>'
           }).join('');
           const table = createTable(rows);
           const html = createHtml(table);
           fs.writeFileSync(buildPathHtml, html);
-          console.log('Succesfully created an HTML table');
+          console.log('Файл HTML создан!');
         } catch (error) {
-          console.log('Error generating table', error);
+          console.log('Error создания HTML файла!', error);
         }
         ctx.replyWithDocument({source: buildPathHtml});
       });
