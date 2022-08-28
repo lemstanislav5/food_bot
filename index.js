@@ -13,6 +13,12 @@ const buildPathHtml = path.resolve('./build.html');
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.help((ctx) => ctx.reply('Send me a sticker'));
 bot.on('sticker', (ctx) => ctx.reply('👍'));
+bot.hears('Помощь', (ctx) => ctx.reply(`
+  - Д.175..28.09..курица с рисом, макараоны с сыром (добавить)
+- У.175 (удалить)
+- П.20.01,30.09 (показать)
+- Р.175..28.09..курица с рисом, макараоны с сыром (редактировать)
+`));
 bot.on('text', (ctx) => {
   if(ctx.botInfo.id != '5670834206') return ctx.reply('Я тебя не знаю!');
   const message = ctx.update.message.text,
@@ -139,12 +145,7 @@ bot.on('text', (ctx) => {
 
     } 
   }
-  if(io('Помощь')){
-    console.log(str)
-  }
-
 });
-bot.hears('hi', (ctx) => ctx.reply('Hey there'));
 bot.launch();
 
 //! Enable graceful stop
